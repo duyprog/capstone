@@ -1,0 +1,24 @@
+version: 2.1 
+
+orbs: 
+  aws-eks: circleci/aws-eks@0.2.0
+
+jobs: 
+
+  build-docker-image: 
+    docker: 
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout 
+      - setup_remote_docker   
+      - run: 
+          name: build and push docker image 
+          command: | 
+            docker build --tag=duypk2000/frontend-devops .
+            docker image ls 
+            docker login -u duypk2000 -p Duy@tt123
+            docker push duypk2000/frontend-devops 
+workflows:
+  default:
+    jobs: 
+      - build-docker-image
