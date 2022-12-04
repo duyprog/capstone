@@ -8,6 +8,7 @@ jobs:
   build-docker-image: 
     docker: 
       - image: docker:17.05.0-ce-git
+    working_directory: ~/project/frontend
     steps:
       - checkout 
       - setup_remote_docker   
