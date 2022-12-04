@@ -8,13 +8,13 @@ jobs:
   build-docker-image: 
     docker: 
       - image: docker:17.05.0-ce-git
-    working_directory: ~/project/frontend
     steps:
       - checkout 
       - setup_remote_docker   
       - run: 
           name: build and push docker image 
           command: | 
+            cd frontend
             docker build --tag=duypk2000/frontend-devops .
             docker image ls 
             docker login -u duypk2000 -p Duy@tt123
