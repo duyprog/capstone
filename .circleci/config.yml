@@ -17,7 +17,7 @@ jobs:
             cd frontend
             docker build --tag=duypk2000/frontend-devops .
             docker image ls 
-            docker login -u duypk2000 -p Duy@tt123
+            docker login -u duypk2000 -p Duyatt123
             docker push duypk2000/frontend-devops 
 workflows:
   default:
