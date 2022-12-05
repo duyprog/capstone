@@ -14,14 +14,12 @@ pipeline{
     stages{
         stage("Checkout SCM"){
             steps{
-                dir('${WORKSPACE}'){
-                    checkout([
-                        $class: 'GitSCM',
-                        branches: [[name: "master"]],
-                        doGenerateSubmoduleConfiguration: false,
-                        userRemoteConfigs: [[url: "${GIT_URL}"]]
-                    ])
-                }
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: "master"]],
+                    doGenerateSubmoduleConfiguration: false,
+                    userRemoteConfigs: [[url: "${GIT_URL}"]]
+                ])
             }
         }
         stage("Build Docker Nginx"){
