@@ -57,8 +57,12 @@ pipeline{
 
         stage("Deploy pod to eks cluster"){
             steps{
-                sh 'kubectl run webapp --image=duypk2000/capstone:frontend:v1'
-                sh 'kubectl get pods -A'
+                dir("${WORKSPACE}/capstone"){
+                    sh 'kubectl apply -f deployment.yaml'
+                    sh 'kubectl get pods -A'
+                    sh 'kubectl get svc'
+                }
+
             }
         }
         // stage("Install Dependencies"){
