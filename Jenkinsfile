@@ -22,6 +22,14 @@ pipeline{
                 ])
             }
         }
+        stage("Lint HTML"){
+            steps{
+                dir("${WORKSPACE}/capstone/frontend"){
+                    sh 'tidy index.html'
+                    sh 'hadolint Dockerfile'
+                }
+            }
+        }
         stage("Build Docker Nginx"){
             steps{
                 dir("${WORKSPACE}/capstone/frontend"){
@@ -46,31 +54,31 @@ pipeline{
             }
         }
 
-        stage("Create EKS cluster"){
-            steps{
-                dir("${WORKSPACE}/capstone"){
-                    withAWS(credentials: 'capstone', region: 'us-east-1'){   
-                        sh 'chmod +x check_existing_cluster.sh'
-                        sh './check_existing_cluster.sh'                    
-                        sh 'kubectl get nodes -o wide'
-                    }
-                }
+        // stage("Create EKS cluster"){
+        //     steps{
+        //         dir("${WORKSPACE}/capstone"){
+        //             withAWS(credentials: 'capstone', region: 'us-east-1'){   
+        //                 sh 'chmod +x check_existing_cluster.sh'
+        //                 sh './check_existing_cluster.sh'                    
+        //                 sh 'kubectl get nodes -o wide'
+        //             }
+        //         }
 
-            }
-        }
+        //     }
+        // }
 
-        stage("Deploy pod to eks cluster"){
-            steps{
-                dir("${WORKSPACE}/capstone"){
-                    withAWS(credentials: 'capstone', region: 'us-east-1'){
-                        sh 'kubectl apply -f deployment.yaml'
-                        sh 'kubectl get pods -A'
-                        sh 'kubectl get svc'
-                    }
+        // stage("Deploy pod to eks cluster"){
+        //     steps{
+        //         dir("${WORKSPACE}/capstone"){
+        //             withAWS(credentials: 'capstone', region: 'us-east-1'){
+        //                 sh 'kubectl apply -f deployment.yaml'
+        //                 sh 'kubectl get pods -A'
+        //                 sh 'kubectl get svc'
+        //             }
 
-                }
-            }
-        }
+        //         }
+        //     }
+        // }
         // stage("Install Dependencies"){
         //     sh 'curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.24.7/2022-10-31/bin/linux/amd64/kubectl'
         //     sh 'chmod +x ./kubectl'
