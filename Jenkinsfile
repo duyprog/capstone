@@ -58,11 +58,13 @@ pipeline{
         stage("Deploy pod to eks cluster"){
             steps{
                 dir("${WORKSPACE}/capstone"){
-                    sh 'kubectl apply -f deployment.yaml'
-                    sh 'kubectl get pods -A'
-                    sh 'kubectl get svc'
-                }
+                    withAWS(credentials: 'capstone', region: 'us-east-1'){
+                        sh 'kubectl apply -f deployment.yaml'
+                        sh 'kubectl get pods -A'
+                        sh 'kubectl get svc'
+                    }
 
+                }
             }
         }
         // stage("Install Dependencies"){
