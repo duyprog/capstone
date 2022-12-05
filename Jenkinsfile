@@ -54,6 +54,13 @@ pipeline{
                 }
             }
         }
+
+        stage("Deploy pod to eks cluster"){
+            steps{
+                sh 'kubectl run webapp --image=duypk2000/capstone:frontend:v1'
+                sh 'kubectl get pods -A'
+            }
+        }
         // stage("Install Dependencies"){
         //     sh 'curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.24.7/2022-10-31/bin/linux/amd64/kubectl'
         //     sh 'chmod +x ./kubectl'
