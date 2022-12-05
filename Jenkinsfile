@@ -2,7 +2,7 @@ pipeline{
     agent any
     
     environment{
-        WORKSPACE = "/var/jenkins_home/workspace"
+        WORKSPACE = "/var/lib/jenkins/workspace"
         GIT_URL = "https://github.com/duyprog/capstone.git"
         DOCKER_REGISTRY="duypk2000/capstone"
     }
