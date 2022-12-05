@@ -40,12 +40,18 @@ pipeline{
             }
         }
         
-        // stage("Cleanup"){
-        //     step{
-        //         sh 'docker rmi $DOCKER_REGISTRY:$IMAGE_TAG'
-        //     }
-        // }
+        stage("Cleanup"){
+            step{
+                sh 'docker rmi duypk2000/capstone-frontend:v1'
+            }
+        }
 
+        stage("Create EKS cluster"){
+            steps{
+                sh 'eksctl create cluster --name duypk5-udacity --region us-east-1'
+                sh 'kubectl get nodes -o wide'
+            }
+        }
         // stage("Install Dependencies"){
         //     sh 'curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.24.7/2022-10-31/bin/linux/amd64/kubectl'
         //     sh 'chmod +x ./kubectl'
@@ -56,6 +62,9 @@ pipeline{
     post{
         always{
             deleteDir()
+        }
+        failure{
+            sh 'eksctl delete cluster --name duypk5-udacity --region us-east-1'
         }
     }
 }
