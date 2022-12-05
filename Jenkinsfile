@@ -48,6 +48,7 @@ pipeline{
 
         stage("Create EKS cluster"){
             steps{
+                withAWS(credentials: 'capstone', region: 'us-east-1')
                 // sh 'eksctl create cluster --name duypk5-udacity --region us-east-1'
                 // sh 'kubectl get nodes -o wide'
                 sh 'aws iam list-users'
