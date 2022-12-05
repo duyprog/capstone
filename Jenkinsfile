@@ -41,7 +41,7 @@ pipeline{
         }
         
         stage("Cleanup"){
-            step{
+            steps{
                 sh 'docker rmi duypk2000/capstone-frontend:v1'
             }
         }
