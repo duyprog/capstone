@@ -53,9 +53,9 @@ pipeline{
         //     sh 'kubectl version --short --client'
         // }
     }
-    post{
-        always{
-            deleteDir()
-        }
-    }
+    // post{
+    //     always{
+    //         deleteDir()
+    //     }
+    // }
 }
