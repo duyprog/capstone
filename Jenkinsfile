@@ -48,8 +48,9 @@ pipeline{
 
         stage("Create EKS cluster"){
             steps{
-                sh 'eksctl create cluster --name duypk5-udacity --region us-east-1'
-                sh 'kubectl get nodes -o wide'
+                // sh 'eksctl create cluster --name duypk5-udacity --region us-east-1'
+                // sh 'kubectl get nodes -o wide'
+                sh 'aws iam list-users'
             }
         }
         // stage("Install Dependencies"){
@@ -63,8 +64,8 @@ pipeline{
         always{
             deleteDir()
         }
-        failure{
-            sh 'eksctl delete cluster --name duypk5-udacity --region us-east-1'
-        }
+        // failure{
+        //     sh 'eksctl delete cluster --name duypk5-udacity --region us-east-1'
+        // }
     }
 }
