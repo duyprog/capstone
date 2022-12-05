@@ -14,7 +14,7 @@ pipeline{
     stages{
         stage("Checkout SCM"){
             steps{
-                dir('${WORKDIR}'){
+                dir('${WORKSPACE}'){
                     checkout([
                         $class: 'GitSCM',
                         branches: [[name: "master"]],
@@ -26,7 +26,7 @@ pipeline{
         }
         stage("Build Docker Nginx"){
             steps{
-                sh 'cd ${WORKDIR}/capstone/frontend'
+                sh 'cd ${WORKSPACE}/capstone/frontend'
                 sh 'sudo docker build . -t duypk2000/capstone-frontend:v1'
                 sh 'sudo docker images'
             }
