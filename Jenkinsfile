@@ -25,15 +25,15 @@ pipeline{
         stage("Build Docker Nginx"){
             steps{
                 sh 'cd ${WORKSPACE}/capstone/frontend'
-                sh 'sudo docker build . -t duypk2000/capstone-frontend:v1'
-                sh 'sudo docker images'
+                sh 'docker build . -t duypk2000/capstone-frontend:v1'
+                sh 'docker images'
             }
         }
 
         stage("Push Docker Image"){
             steps{
-                sh 'sudo docker login -u duypk2000 -p Duyatt123'
-                sh 'sudo docker push duypk2000/capstone-frontend:v1'
+                sh 'docker login -u duypk2000 -p Duyatt123'
+                sh 'docker push duypk2000/capstone-frontend:v1'
             }
         }
         
