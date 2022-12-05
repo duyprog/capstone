@@ -24,7 +24,7 @@ pipeline{
         }
         stage("Build Docker Nginx"){
             steps{
-                dir('${WORKSPACE}/capstone/frontend'){
+                dir("${WORKSPACE}/capstone/frontend"){
                     sh 'pwd'
                     sh 'docker build . -t duypk2000/capstone-frontend:v1'
                     sh 'docker images'
