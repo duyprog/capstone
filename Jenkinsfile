@@ -58,8 +58,8 @@ pipeline{
             steps{
                 dir("${WORKSPACE}/capstone"){
                     withAWS(credentials: 'capstone', region: 'us-east-1'){   
-                        sh 'chmod +x check_existing_cluster.sh'
-                        sh './check_existing_cluster.sh'                    
+                        // sh 'chmod +x check_existing_cluster.sh'
+                        // sh './check_existing_cluster.sh'                    
                         sh 'kubectl get nodes -o wide'
                     }
                 }
