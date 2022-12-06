@@ -59,7 +59,8 @@ pipeline{
                 dir("${WORKSPACE}/capstone"){
                     withAWS(credentials: 'capstone', region: 'us-east-1'){   
                         // sh 'chmod +x check_existing_cluster.sh'
-                        // sh './check_existing_cluster.sh'                    
+                        // sh './check_existing_cluster.sh'  
+                        eksctl create cluster --name duypk5-udacity --region us-east-1                  
                         sh 'kubectl get nodes -o wide'
                     }
                 }
